@@ -5,13 +5,21 @@
 class Tfmigrator < Formula
   desc "Migrate Terraform Configuration and State"
   homepage "https://github.com/tfmigrator/cli"
-  version "0.2.1"
+  version "0.2.2"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/tfmigrator/cli/releases/download/v0.2.1/tfmigrator_darwin_amd64.tar.gz"
-      sha256 "a967d1cdf3bc6897baa4ec6bffd8479d8e73a4b2fe97b07637d1e7e36c60bbcb"
+      url "https://github.com/tfmigrator/cli/releases/download/v0.2.2/tfmigrator_darwin_amd64.tar.gz"
+      sha256 "2197e1a7e4d482b99c3c4e80d64060d7ba309236c277defa87dbaee103f077f1"
+
+      def install
+        bin.install "tfmigrator"
+      end
+    end
+    if Hardware::CPU.arm?
+      url "https://github.com/tfmigrator/cli/releases/download/v0.2.2/tfmigrator_darwin_arm64.tar.gz"
+      sha256 "c0c29f259a66d8a5cf1c2ae00edce22daad9840af14c5c0fcc5e8bcb08242740"
 
       def install
         bin.install "tfmigrator"
@@ -20,9 +28,17 @@ class Tfmigrator < Formula
   end
 
   on_linux do
+    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
+      url "https://github.com/tfmigrator/cli/releases/download/v0.2.2/tfmigrator_linux_arm64.tar.gz"
+      sha256 "1f5776d14945478ef9e09721d9d8f7d84c3af6a040c7dff427c5d97d99c4c1ed"
+
+      def install
+        bin.install "tfmigrator"
+      end
+    end
     if Hardware::CPU.intel?
-      url "https://github.com/tfmigrator/cli/releases/download/v0.2.1/tfmigrator_linux_amd64.tar.gz"
-      sha256 "652f13430c2571e5d5ca065dc7f1bf93e551248c252bce9d1d3f8e4596a2db05"
+      url "https://github.com/tfmigrator/cli/releases/download/v0.2.2/tfmigrator_linux_amd64.tar.gz"
+      sha256 "4a54afaa4d822f31f01b864b681a854f1cfeaad31df2ed5c2bf66d497aa32421"
 
       def install
         bin.install "tfmigrator"
